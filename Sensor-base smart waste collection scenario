@@ -1,0 +1,41 @@
+load original_waste_ro30.mat;
+m=60;
+f=0.9;
+c=1;
+d=0;
+waste2=original_waste_ro30;
+for a=2:31
+    c=1;
+    d=d+1;
+    if a<=4
+        for b=1:396
+            waste2(b,a+1)=waste2(b,a)+waste2(b,a+1);
+            selected_waste2(b,a)=0;
+            bins2(c,d)=0;
+            c=c+1;
+        end
+    else if a>=4 && a<31
+       for b=1:396
+        if waste2(b,a)>=f*m
+            selected_waste2(b,a)=waste2(b,a);
+            bins2(c,d)=waste2(b,1);
+            c=c+1;
+        else
+            waste2(b,a+1)=waste2(b,a)+waste2(b,a+1);
+            selected_waste2(b,a)=0;
+        end
+       end
+    else if a==31
+        for b=1:396
+        if waste2(b,a)>=f*m
+        selected_waste2(b,a)=waste2(b,a);
+                    bins2(c,d)=waste2(b,1);
+            c=c+1;
+        else
+        selected_waste2(b,a)=0;
+        end 
+        end
+        end
+    end
+    end
+end
